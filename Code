@@ -286,23 +286,35 @@ new version
 
 
 
+
+#I want to develop a programme for asda to search product, when a customer enters a name,
+#the programme will tell him the product's coordinate.
+#also, the manager should be able to modify the data.
+#but this programme has a few bugs:
+#1. [Errno 2] No such file or directory: '/Users/abc/Desktop/product_info.txt'
+#   even though i really have this file in desktop, and i have tried the absolute/relative path.
+#2. init_() is not working
+    
+    
 import pickle
- 
-#studentinfo = {'netboy': '15011038018',\
-#                'godboy': '15011235698'}
+import os
+
+    
+#productinfo = {'oil': '1218',\
+#                'chocolate': '2408'}
 productinfo = {}
  
 FUNC_NUM = 5
- 
+
 def write_file(value):
-    file = open('product_info.txt', 'wb')
+    file = open('/Users/abc/Desktop/product_info.txt', 'wb')
     file.truncate()
     pickle.dump(value, file, True)
     file.close()
  
 def read_file():
     global productinfo
-    file = open('product_info.txt', 'rb')
+    file = open('/Users/abc/Desktop/product_info.txt', 'rb')
     productinfo = pickle.load(file)
     file.close()
  
@@ -310,9 +322,9 @@ def search_product():
     global productinfo
     name = input('please input product\'s name:')
     if name in productinfo:
-        print('name:%s phone:%s' % (name, productinfo[name]))
+        print('name:%s coordinate:%s' % (name, productinfo[name]))
     else:
-        print('has no this body')
+        print('this product is not available')
  
 def delete_product():
     global productinfo
@@ -351,7 +363,7 @@ func = {1 : search_product, \
     5 : show_all}
  
 def menu():
-    print('-----------------------------------------------');
+    print('---welcome to asda product management system---');
     print('1 search product:')
     print('2 delete product:')
     print('3 add product:')
@@ -362,7 +374,7 @@ def menu():
  
 def init_data():
     global productinfo
-    file = open('product_info.txt', 'rb')
+    file = open('/Users/abc/Desktop/product_info.txt', 'rb')
     productinfo = pickle.load(file)
     #print(productinfo)
     file.close()
@@ -374,7 +386,7 @@ while True:
     if index == FUNC_NUM + 1:
         exit()
     elif index < 1 or index > FUNC_NUM + 1:
-        print('num is between 1-%d' % (FUNC_NUM + 1))
+        print('num need to be between 1-%d' % (FUNC_NUM + 1))
         continue
     #print(index)
     func[index]()
