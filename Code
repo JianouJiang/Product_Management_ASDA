@@ -265,3 +265,116 @@ while True:
         print("输入的选项不存在，请重新输入！")
         continue
         
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+new version
+
+
+
+
+
+
+import pickle
+ 
+#studentinfo = {'netboy': '15011038018',\
+#                'godboy': '15011235698'}
+studentinfo = {}
+ 
+FUNC_NUM = 5
+ 
+def write_file(value):
+    file = open('student_info.txt', 'wb')
+    file.truncate()
+    pickle.dump(value, file, True)
+    file.close
+ 
+def read_file():
+    global studentinfo
+    file = open('student_info.txt', 'rb')
+    studentinfo = pickle.load(file)
+    file.close()
+ 
+def search_student():
+    global studentinfo
+    name = input('please input student\'s name:')
+    if name in studentinfo:
+        print('name:%s phone:%s' % (name, studentinfo[name]))
+    else:
+        print('has no this body')
+ 
+def delete_student():
+    global studentinfo
+    name = input('please input student\'s name:')
+    if name in studentinfo:
+        studentinfo.pop(name)
+        write_file(studentinfo)
+    else:
+        print('has no this body')
+ 
+def add_student():
+    global studentinfo
+    name = input('please input student\'s name:')
+    phone = input('please input phone:')
+    studentinfo[name] = phone
+    write_file(studentinfo)
+ 
+def modifiy_student():
+    global studentinfo
+    name = input('please input student\'s name:')
+    if name in studentinfo:
+        phone = input('please input student\'s phone:')
+        studentinfo[name] = phone
+    else:
+        print('has no this name')
+ 
+def show_all():
+    global studentinfo
+    for key, value in studentinfo.items():
+        print('name:' + key + 'phone:' + value)
+ 
+func = {1 : search_student, \
+    2 : delete_student, \
+    3 : add_student, \
+    4 : modifiy_student, \
+    5 : show_all}
+ 
+def menu():
+    print('-----------------------------------------------');
+    print('1 search student:')
+    print('2 delete student:')
+    print('3 add student:')
+    print('4 modifiy student:')
+    print('5 show all student')
+    print('6 exit')
+    print('-----------------------------------------------');
+ 
+def init_data():
+    global studentinfo
+    file = open('student_info.txt', 'rb')
+    studentinfo = pickle.load(file)
+    #print(studentinfo)
+    file.close()
+ 
+init_data()
+while True:
+    menu()
+    index = int(input())
+    if index == FUNC_NUM + 1:
+        exit()
+    elif index < 1 or index > FUNC_NUM + 1:
+        print('num is between 1-%d' % (FUNC_NUM + 1))
+        continue
+    #print(index)
+    func[index]()
