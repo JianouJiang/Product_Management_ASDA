@@ -290,81 +290,81 @@ import pickle
  
 #studentinfo = {'netboy': '15011038018',\
 #                'godboy': '15011235698'}
-studentinfo = {}
+productinfo = {}
  
 FUNC_NUM = 5
  
 def write_file(value):
-    file = open('student_info.txt', 'wb')
+    file = open('product_info.txt', 'wb')
     file.truncate()
     pickle.dump(value, file, True)
-    file.close
- 
-def read_file():
-    global studentinfo
-    file = open('student_info.txt', 'rb')
-    studentinfo = pickle.load(file)
     file.close()
  
-def search_student():
-    global studentinfo
-    name = input('please input student\'s name:')
-    if name in studentinfo:
-        print('name:%s phone:%s' % (name, studentinfo[name]))
+def read_file():
+    global productinfo
+    file = open('product_info.txt', 'rb')
+    productinfo = pickle.load(file)
+    file.close()
+ 
+def search_product():
+    global productinfo
+    name = input('please input product\'s name:')
+    if name in productinfo:
+        print('name:%s phone:%s' % (name, productinfo[name]))
     else:
         print('has no this body')
  
-def delete_student():
-    global studentinfo
-    name = input('please input student\'s name:')
-    if name in studentinfo:
-        studentinfo.pop(name)
-        write_file(studentinfo)
+def delete_product():
+    global productinfo
+    name = input('please input product\'s name:')
+    if name in productinfo:
+        productinfo.pop(name)
+        write_file(productinfo)
     else:
-        print('has no this body')
+        print('no product found')
  
-def add_student():
-    global studentinfo
-    name = input('please input student\'s name:')
-    phone = input('please input phone:')
-    studentinfo[name] = phone
-    write_file(studentinfo)
+def add_product():
+    global productinfo
+    name = input('please input product\'s name:')
+    coordinate = input('please input coordinate:')
+    productinfo[name] = coordinate
+    write_file(productinfo)
  
-def modifiy_student():
-    global studentinfo
-    name = input('please input student\'s name:')
-    if name in studentinfo:
-        phone = input('please input student\'s phone:')
-        studentinfo[name] = phone
+def modifiy_product():
+    global productinfo
+    name = input('please input product\'s name:')
+    if name in productinfo:
+        coordinate = input('please input product\'s coordinate:')
+        productinfo[name] = coordinate
     else:
-        print('has no this name')
+        print('no product found')
  
 def show_all():
-    global studentinfo
-    for key, value in studentinfo.items():
-        print('name:' + key + 'phone:' + value)
+    global productinfo
+    for key, value in productinfo.items():
+        print('name:' + key + 'coordinate:' + value)
  
-func = {1 : search_student, \
-    2 : delete_student, \
-    3 : add_student, \
-    4 : modifiy_student, \
+func = {1 : search_product, \
+    2 : delete_product, \
+    3 : add_product, \
+    4 : modifiy_product, \
     5 : show_all}
  
 def menu():
     print('-----------------------------------------------');
-    print('1 search student:')
-    print('2 delete student:')
-    print('3 add student:')
-    print('4 modifiy student:')
-    print('5 show all student')
+    print('1 search product:')
+    print('2 delete product:')
+    print('3 add product:')
+    print('4 modifiy product:')
+    print('5 show all products')
     print('6 exit')
     print('-----------------------------------------------');
  
 def init_data():
-    global studentinfo
-    file = open('student_info.txt', 'rb')
-    studentinfo = pickle.load(file)
-    #print(studentinfo)
+    global productinfo
+    file = open('product_info.txt', 'rb')
+    productinfo = pickle.load(file)
+    #print(productinfo)
     file.close()
  
 init_data()
